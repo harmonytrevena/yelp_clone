@@ -1,7 +1,7 @@
 'use strict'
 const db = require('./conn');
 
-class RestuarantList {
+class RestaurantList {
     constructor(name, distance, stars, category, favorite_dish, does_takeout, last_eaten) {
         this.name = name;
         this.distance = distance;
@@ -20,6 +20,15 @@ class RestuarantList {
             return error.message;
         }
     }
+    static async getOne() {
+        try {
+            const response = await db.any(`SELECT * FROM review INNER JOIN restaurants on review.restaurant_id = restaurants.id WHERE restaurants.name = 'Red Ginger';`);
+            console.log(response);
+            return response;
+        } catch (error) {
+            return error.message;
+        }
+    }
 }
 
-module.exports = RestuarantList;
+module.exports = RestaurantList;
