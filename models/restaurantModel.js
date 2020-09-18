@@ -2,7 +2,7 @@
 const db = require('./conn');
 
 class RestaurantList {
-    constructor(name, distance, stars, category, favorite_dish, does_takeout, last_eaten) {
+    constructor(name, distance, stars, category, favorite_dish, does_takeout, last_eaten, slug) {
         this.name = name;
         this.distance = distance;
         this.stars = stars;
@@ -23,9 +23,16 @@ class RestaurantList {
     }
     static async getOne(slug) {
         try {
-            const response = await db.any(`SELECT * restaurants INNER JOIN review ON restaurants.id = review.restaurant_id WHERE slug= $1;`, [slug]);
+            const response = await db.one(`SELECT * FROM restaurants WHERE slug = $1;`, [slug]);
             console.log(response);
             return response;
+        } catch (error) {
+            return error.message;
+        }
+    }
+    static async addReview(data) {
+        try {
+            await db.any(`INSERT INTO review (title, review, stars, reviewer_id, restaurant_id) VALUES $1, $2, $3, $4, $5;`, [data.title, data.review, data.stars, data.reviewer_id, data.restaurant_id]);
         } catch (error) {
             return error.message;
         }

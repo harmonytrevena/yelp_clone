@@ -2,13 +2,10 @@
 
 ${data.map(restaurant => {
     return `
-        <h2><a href='/restaurant/${restaurant.slug}'></a></h2>
+        <h2><a href='/details/${restaurant.slug}'>${restaurant.name}</a></h2>
         <ul>
-            <li>This restaurant is <strong>${restaurant.distance} mile from Duluth.</strong></li>
+            <li>This restaurant is <strong>${restaurant.distance} mile from Duluth</strong></li>
             <li>It has a rating of <strong>${restaurant.stars} out of 5!</strong></li>
-            <li>Cuisine is <strong>${restaurant.category}.</strong></li>
-            <li>Prefered dish: <strong>${restaurant.favorite_dish}.</strong></li>
-            <li>Takeout: <strong>${restaurant.does_takeout}.</strong></li>
-            <li>Previously ordered on <strong>${restaurant.last_eaten}.</strong></li>
+            <li>Cuisine is <strong>${restaurant.category}</strong></li>
         </ul>
 `}).join('')}

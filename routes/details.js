@@ -2,24 +2,26 @@ const db = require('../models/conn');
 
 const express = require('express'),
     router = express.Router(),
-    restaurantsList = require('../models/restaurantModel')
+    restaurantList = require('../models/restaurantModel')
 
 router.get('/:name?', async (req, res) =>{
     if(req.params.name === undefined){
         res.redirect('/')
-    } else{
-    const resDetails = await restaurantsList.getOne(req.params.name)
-    // const revDetails= await restaurantsList.getReviews(req.params.name)
-    console.log(revDetails)
+    } else {
+    const restaurantDetails = await restaurantList.getOne(req.params.name)
+    console.log(restaurantDetails)
+    
     res.render("template", {
         locals: {
-            title: "Details",
-            data: resDetails,
-            // revData: revDetails
+            title: "Restaurant Details",
+            data: restaurantDetails
         },
         partials: {
             partial: "partial-details"
         }
-    });}
+    });
+    }
 });
+
+
 module.exports = router;
