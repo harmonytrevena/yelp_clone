@@ -25,8 +25,8 @@ server.listen(port, hostname, () => {
 
 const rootController = require('./routes/index');
 const resController = require('./routes/restaurant');
-// const resSpecificController =  require('./routes/restaurant/:id?');
+const resSpecificController =  require('./routes/details');
 
 app.use('/', rootController); // Root route, the main route
 app.use('/restaurant', resController); 
-// app.use('/restaurant/:id?', resSpecificController);
+app.use('/details', resSpecificController);

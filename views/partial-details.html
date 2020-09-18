@@ -2,7 +2,7 @@
 
 ${data.map(restaurant => {
     return `
-        <h2><a href='/restaurant/${restaurant.slug}'></a></h2>
+        <h2>${restaurant.name}</h2>
         <ul>
             <li>This restaurant is <strong>${restaurant.distance} mile from Duluth.</strong></li>
             <li>It has a rating of <strong>${restaurant.stars} out of 5!</strong></li>

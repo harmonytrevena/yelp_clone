@@ -10,6 +10,7 @@ class RestaurantList {
         this.favorite_dish = favorite_dish;
         this.does_takeout = does_takeout;
         this.last_eaten = last_eaten;
+        this.slug = slug;
     }
     static async getAll() {
         try {
@@ -20,9 +21,9 @@ class RestaurantList {
             return error.message;
         }
     }
-    static async getOne() {
+    static async getOne(slug) {
         try {
-            const response = await db.any(`SELECT * FROM review INNER JOIN restaurants on review.restaurant_id = restaurants.id WHERE restaurants.name = 'Red Ginger';`);
+            const response = await db.any(`SELECT * restaurants INNER JOIN review ON restaurants.id = review.restaurant_id WHERE slug= $1;`, [slug]);
             console.log(response);
             return response;
         } catch (error) {
